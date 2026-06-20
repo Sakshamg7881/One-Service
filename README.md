@@ -405,6 +405,28 @@ POST   /api/chat/:bookingId         Send message
 → Use `stripe listen --forward-to localhost:5000/api/payments/webhook` for local testing
 
 ---
+## 🏆 Hackathon Journey
+
+OneService was originally developed during **HackTheBeginning'26**, organized by **I.T.S. Engineering College** on **10–11 April 2026**.
+
+Out of approximately **75 teams** selected for the screening round, our team secured a position among the **Top 15 finalists** and achieved **8th Rank Overall**. The team was also awarded a **Consolation Trophy** and **Participation Certificate** for the project.
+
+### Team Members
+
+* Rohit Raj
+* Saksham Gupta
+* Rishab Kumar
+
+### Project Development
+
+The initial prototype of OneService was created during the hackathon and has continued to evolve through additional development, testing, debugging, and feature enhancements.
+
+### Acknowledgements
+
+Special thanks to **Claude AI** for assisting with rapid prototyping, code generation, debugging support, and development guidance during the hackathon.
+
+We also thank **I.T.S. Engineering College** for organizing HackTheBeginning'26 and providing a platform for innovation, collaboration, and learning.
+
 
 ## 📬 Support
 
