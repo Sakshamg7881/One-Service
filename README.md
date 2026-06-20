@@ -1,3 +1,18 @@
+# OneService
+
+OneService is a modern home services marketplace designed to connect customers with trusted service professionals through a seamless digital platform.
+
+The project was developed during HackTheBeginning'26, a hackathon organized at I.T.S. Engineering College on 10–11 April 2026. Out of approximately 75 teams that qualified for the screening round, our team secured a place among the Top 15 teams and achieved 8th position overall. We were also awarded a Consolation Trophy and Participation Certificate for our work.
+
+The platform aims to simplify the process of discovering, booking, managing, and communicating with service providers while leveraging modern technologies such as Next.js, Node.js, MongoDB, Socket.io, cloud storage, and AI-powered features.
+
+## Team Members
+
+* Rohit Raj
+* Saksham Gupta
+* Rishav Kumar
+
+  
 # 🚀 OneService — Full-Stack AI Service Marketplace
 
 A production-ready AI-powered home services marketplace with real-time capabilities, secure payments, and intelligent vendor matching.
