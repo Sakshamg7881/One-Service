@@ -41,18 +41,21 @@ export default function AdminPage() {
     { enabled: tab === "users" }
   );
 
-  const vendorMutation = useMutation(
-    ({ vendorId, action, note }: { vendorId: string; action: string; note?: string }) =>
-      api.patch(`/admin/vendors/${vendorId}/approve`, { action, note }),
-    {
-      onSuccess: (_, vars) => {
-        queryClient.invalidateQueries("admin-vendors");
-        queryClient.invalidateQueries("admin-stats");
-        toast.success(`Vendor ${vars.action}d successfully.`);
-      },
-      onError: () => toast.error("Action failed."),
-    }
-  );
+ const vendorMutation = useMutation({
+  mutationFn: ({ vendorId, action, note }: {
+    vendorId: string;
+    action: string;
+    note?: string;
+  }) =>
+    api.patch(`/admin/vendors/${vendorId}/approve`, {
+      action,
+      note,
+    }),
+
+  onSuccess: () => {
+    // keep your existing onSuccess code here
+  },
+});
 
   const stats = statsData?.data;
 
