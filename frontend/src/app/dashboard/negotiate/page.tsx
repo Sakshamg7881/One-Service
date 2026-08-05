@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "react-query";
 import Link from "next/link";
@@ -11,7 +11,7 @@ import {
 import toast from "react-hot-toast";
 import api from "@/lib/api";
 
-export default function PriceNegotiationPage() {
+function NegotiateContent() {
   const searchParams = useSearchParams();
   const serviceId = searchParams.get("serviceId");
 
@@ -196,5 +196,18 @@ export default function PriceNegotiationPage() {
         </AnimatePresence>
       </div>
     </div>
+  );
+}
+export default function NegotiatePage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <NegotiateContent />
+    </Suspense>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 export const dynamic = "force-dynamic";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useMutation } from "react-query";
 import Link from "next/link";
@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import api from "@/lib/api";
 import { useAuthStore } from "@/store/authStore";
 
-export default function WriteReviewPage() {
+function WriteReviewContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const bookingId = searchParams.get("bookingId");
@@ -141,5 +141,18 @@ const mutation = useMutation(
         </motion.div>
       </div>
     </div>
+  );
+}
+export default function WriteReviewPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <WriteReviewContent />
+    </Suspense>
   );
 }

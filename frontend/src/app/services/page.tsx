@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useQuery } from "react-query";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -15,7 +15,7 @@ const SORT_OPTIONS = [
   { value: "newest",     label: "Newest" },
 ];
 
-export default function ServicesPage() {
+function ServicesContent() {
   const searchParams = useSearchParams();
   const [category, setCategory] = useState(searchParams.get("category") || "All");
   const [search, setSearch] = useState(searchParams.get("search") || "");
@@ -204,5 +204,18 @@ export default function ServicesPage() {
         )}
       </div>
     </div>
+  );
+}
+export default function ServicesPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <ServicesContent />
+    </Suspense>
   );
 }

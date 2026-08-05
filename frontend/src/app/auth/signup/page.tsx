@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -24,7 +24,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export default function SignupPage() {
+function SignupContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const defaultRole = (searchParams.get("role") as "user" | "vendor") || "user";
@@ -183,5 +183,18 @@ export default function SignupPage() {
         </p>
       </motion.div>
     </div>
+  );
+}
+export default function SignupPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <SignupContent />
+    </Suspense>
   );
 }
