@@ -36,16 +36,18 @@ export default function ServiceDetailPage() {
     { enabled: !!data?.data?.vendor?._id }
   );
 
-  const bookingMutation = useMutation(
-    (payload: any) => api.post("/bookings", payload),
-    {
-      onSuccess: (res) => {
-        toast.success("Booking created! Proceed to payment.");
-        router.push(`/dashboard/bookings/${res.data.data._id}`);
-      },
-      onError: (err: any) => toast.error(err.response?.data?.message || "Booking failed."),
-    }
-  );
+const bookingMutation = useMutation(
+  (payload: any) => api.post("/bookings", payload),
+  {
+    onSuccess: (res) => {
+      toast.success("Booking created! Proceed to payment.");
+      router.push(`/dashboard/bookings/${res.data.data._id}`);
+    },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.message || "Booking failed.");
+    },
+  }
+);
 
   const service = data?.data;
   const reviews = reviewsData?.data || [];

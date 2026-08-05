@@ -53,17 +53,19 @@ export default function VendorDashboardPage() {
   const vendor = vendorData?.data;
   const bookings = bookingsData?.data || [];
 
-  const statusMutation = useMutation(
-    ({ bookingId, status }: { bookingId: string; status: string }) =>
-      api.patch(`/bookings/${bookingId}/status`, { status }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("vendor-bookings");
-        toast.success("Booking status updated.");
-      },
-      onError: (err: any) => toast.error(err.response?.data?.message || "Failed to update."),
-    }
-  );
+ const statusMutation = useMutation(
+  ({ bookingId, status }: { bookingId: string; status: string }) =>
+    api.patch(`/bookings/${bookingId}/status`, { status }),
+  {
+    onSuccess: () => {
+      queryClient.invalidateQueries("vendor-bookings");
+      toast.success("Booking status updated.");
+    },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.message || "Failed to update.");
+    },
+  }
+);
 
   // Pending approval screen
   if (vendor && vendor.status === "pending") {

@@ -20,21 +20,32 @@ export default function VendorServicesPage() {
     { enabled: !!vendor?._id }
   );
 
-  const toggleMutation = useMutation(
-    ({ id, isActive }: { id: string; isActive: boolean }) => api.patch(`/services/${id}`, { isActive }),
-    {
-      onSuccess: () => { queryClient.invalidateQueries("vendor-services"); toast.success("Updated!"); },
-      onError: () => toast.error("Failed to update."),
-    }
-  );
+const toggleMutation = useMutation(
+  ({ id, isActive }: { id: string; isActive: boolean }) =>
+    api.patch(`/services/${id}`, { isActive }),
+  {
+    onSuccess: () => {
+      queryClient.invalidateQueries("vendor-services");
+      toast.success("Updated!");
+    },
+    onError: () => {
+      toast.error("Failed to update.");
+    },
+  }
+);
 
-  const deleteMutation = useMutation(
-    (id: string) => api.delete(`/services/${id}`),
-    {
-      onSuccess: () => { queryClient.invalidateQueries("vendor-services"); toast.success("Service deleted."); },
-      onError: () => toast.error("Delete failed."),
-    }
-  );
+const deleteMutation = useMutation(
+  (id: string) => api.delete(`/services/${id}`),
+  {
+    onSuccess: () => {
+      queryClient.invalidateQueries("vendor-services");
+      toast.success("Service deleted.");
+    },
+    onError: () => {
+      toast.error("Delete failed.");
+    },
+  }
+);
 
   const services = data?.data || [];
 

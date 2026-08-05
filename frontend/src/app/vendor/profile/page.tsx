@@ -42,18 +42,24 @@ export default function VendorProfilePage() {
     setValue("categories", next);
   };
 
-  const mutation = useMutation(
-    (data: any) => api.patch("/vendors/me", {
+const mutation = useMutation(
+  (data: any) =>
+    api.patch("/vendors/me", {
       businessName: data.businessName,
       description: data.description,
       categories: data.categories,
       location: { city: data.city, address: data.address },
     }),
-    {
-      onSuccess: () => { queryClient.invalidateQueries("vendor-me"); toast.success("Profile updated!"); },
-      onError: () => toast.error("Update failed."),
-    }
-  );
+  {
+    onSuccess: () => {
+      queryClient.invalidateQueries("vendor-me");
+      toast.success("Profile updated!");
+    },
+    onError: () => {
+      toast.error("Update failed.");
+    },
+  }
+);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-blue-50">

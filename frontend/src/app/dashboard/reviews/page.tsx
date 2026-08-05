@@ -26,19 +26,24 @@ export default function WriteReviewPage() {
     { enabled: !!bookingId && isAuthenticated }
   );
 
-  const mutation = useMutation(
-    () => api.post("/reviews", {
+const mutation = useMutation(
+  () =>
+    api.post("/reviews", {
       bookingId,
       vendorId: data?.data?.vendor?._id,
       serviceId: data?.data?.service?._id,
       rating,
       comment,
     }),
-    {
-      onSuccess: () => setSubmitted(true),
-      onError: (err: any) => toast.error(err.response?.data?.message || "Failed to submit review."),
-    }
-  );
+  {
+    onSuccess: () => {
+      setSubmitted(true);
+    },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.message || "Failed to submit review.");
+    },
+  }
+);
 
   const booking = data?.data;
   const LABELS = ["", "Terrible", "Poor", "Okay", "Good", "Excellent"];

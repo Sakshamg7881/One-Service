@@ -54,23 +54,29 @@ export default function VendorSchedulePage() {
     }
   }, [vendorData]);
 
-  const saveMutation = useMutation(
-    () => api.patch("/vendors/me", {
+const saveMutation = useMutation(
+  () =>
+    api.patch("/vendors/me", {
       availability: {
         isOnline,
-        slots: slots.filter((s) => s.enabled).map(({ day, from, to }) => ({ day, from, to })),
+        slots: slots
+          .filter((s) => s.enabled)
+          .map(({ day, from, to }) => ({ day, from, to })),
       },
     }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("vendor-me");
-        toast.success("Schedule saved!");
-        // Emit online status to socket
-        if (socket) socket.emit("vendor_status", { isOnline });
-      },
-      onError: () => toast.error("Save failed."),
-    }
-  );
+  {
+    onSuccess: () => {
+      queryClient.invalidateQueries("vendor-me");
+      toast.success("Schedule saved!");
+
+      // Emit online status to socket
+      if (socket) socket.emit("vendor_status", { isOnline });
+    },
+    onError: () => {
+      toast.error("Save failed.");
+    },
+  }
+);
 
   const toggleDay = (day: string) => {
     setSlots((prev) => prev.map((s) => s.day === day ? { ...s, enabled: !s.enabled } : s));

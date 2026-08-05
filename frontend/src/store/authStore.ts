@@ -15,6 +15,13 @@ export interface User {
   isVerified: boolean;
   location?: { coordinates: [number, number]; address: string };
   fcmToken?: string;
+
+  preferences?: {
+    emailNotifications?: boolean;
+    smsNotifications?: boolean;
+    pushNotifications?: boolean;
+    [key: string]: boolean | undefined;
+  };
 }
 
 interface AuthState {

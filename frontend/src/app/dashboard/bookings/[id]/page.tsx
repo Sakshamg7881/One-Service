@@ -179,13 +179,22 @@ export default function BookingDetailPage() {
     return () => { socket.off("booking_status_update"); socket.off("vendor_location_update"); };
   }, [socket, id]);
 
-  const cancelMutation = useMutation(
-    () => api.patch(`/bookings/${id}/status`, { status: "cancelled", cancellationReason: "Cancelled by user." }),
-    {
-      onSuccess: () => { toast.success("Booking cancelled."); refetch(); },
-      onError: (err: any) => toast.error(err.response?.data?.message || "Cancel failed."),
-    }
-  );
+const cancelMutation = useMutation(
+  () =>
+    api.patch(`/bookings/${id}/status`, {
+      status: "cancelled",
+      cancellationReason: "Cancelled by user.",
+    }),
+  {
+    onSuccess: () => {
+      toast.success("Booking cancelled.");
+      refetch();
+    },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.message || "Cancel failed.");
+    },
+  }
+);
 
   const booking = data?.data;
 
