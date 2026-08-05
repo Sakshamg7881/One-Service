@@ -1,5 +1,11 @@
 # OneService
 
+##🌐 Live Demo
+
+🔗 **Website:** https://one-service-one.vercel.app/
+
+Experience OneService without any local setup by visiting the live application above.
+
 OneService is a modern home services marketplace designed to connect customers with trusted service professionals through a seamless digital platform.
 
 The project was developed during HackTheBeginning'26, a hackathon organized at I.T.S. Engineering College on 10–11 April 2026. Out of approximately 75 teams that qualified for the screening round, our team secured a place among the Top 15 teams and achieved 8th position overall. We were also awarded a Consolation Trophy and Participation Certificate for our work.
