@@ -1,4 +1,4 @@
-/**
+﻿/**
  * OneService – Axios API Client
  * Handles JWT auth, auto-refresh tokens, and error normalisation
  */
@@ -16,7 +16,8 @@ const api = axios.create({
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   if (typeof window !== "undefined") {
     const token = localStorage.getItem("accessToken");
-    if (token && config.headers) {
+    if (token) {
+      if (!config.headers) config.headers = {} as any;
       config.headers.Authorization = `Bearer ${token}`;
     }
   }
@@ -47,6 +48,7 @@ api.interceptors.response.use(
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
         }).then((token) => {
+          if (!originalRequest.headers) originalRequest.headers = {} as any;
           originalRequest.headers.Authorization = `Bearer ${token}`;
           return api(originalRequest);
         });
@@ -65,8 +67,10 @@ api.interceptors.response.use(
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", newRefresh);
 
+        api.defaults.headers.common = api.defaults.headers.common || {};
         api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
         processQueue(null, accessToken);
+        if (!originalRequest.headers) originalRequest.headers = {} as any;
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return api(originalRequest);
       } catch (refreshError) {
