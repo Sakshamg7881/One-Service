@@ -420,7 +420,6 @@ Out of approximately **75 teams** selected for the screening round, our team sec
 
 * Rohit Raj
 * Saksham Gupta
-* Rishab Kumar
 
 ### Project Development
 
